@@ -27,7 +27,7 @@ CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 # Not async
 def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = None) -> str:
     if is_user_admin(chat, user.id):
-        message.reply_text("Damn admins, can't even be warned!")
+        message.reply_text("Damn admins, can't even be warned!😝")
         return ""
 
     if warner:
@@ -41,11 +41,11 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         sql.reset_warns(user.id, chat.id)
         if soft_warn:  # kick
             chat.unban_member(user.id)
-            reply = "{} warnings, {} has been kicked!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{} warnings, {} has been kicked!".format(limit, mention_html(user.id, user.first_name)👮)
 
         else:  # ban
             chat.kick_member(user.id)
-            reply = "{} warnings, {} has been banned!".format(limit, mention_html(user.id, user.first_name))
+            reply = "{} warnings, {} has been banned!".format(limit, mention_html(user.id, user.first_name)👮)
 
         for warn_reason in reasons:
             reply += "\n - {}".format(html.escape(warn_reason))
@@ -66,7 +66,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         keyboard = InlineKeyboardMarkup(
             [[InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id))]])
 
-        reply = "{} has {}/{} warnings... watch out!".format(mention_html(user.id, user.first_name), num_warns,
+        reply = "!{} has {}/{} warnings... !".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
         if reason:
             reply += "\nReason for last warn:\n{}".format(html.escape(reason))
@@ -316,14 +316,14 @@ def set_warn_limit(bot: Bot, update: Update, args: List[str]) -> str:
                 msg.reply_text("The minimum warn limit is 3!")
             else:
                 sql.set_warn_limit(chat.id, int(args[0]))
-                msg.reply_text("Updated the warn limit to {}".format(args[0]))
+                msg.reply_text("😇Updated the warn limit to {}".format(args[0]))
                 return "<b>{}:</b>" \
                        "\n#SET_WARN_LIMIT" \
                        "\n<b>Admin:</b> {}" \
                        "\nSet the warn limit to <code>{}</code>".format(html.escape(chat.title),
                                                                         mention_html(user.id, user.first_name), args[0])
         else:
-            msg.reply_text("Give me a number as an arg!")
+            msg.reply_text("Give me a number as an arg😐!")
     else:
         limit, soft_warn = sql.get_warn_setting(chat.id)
 
@@ -341,7 +341,7 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
     if args:
         if args[0].lower() in ("on", "yes"):
             sql.set_warn_strength(chat.id, False)
-            msg.reply_text("Too many warns will now result in a ban!")
+            msg.reply_text("Too many warns will now result in a ban😁!")
             return "<b>{}:</b>\n" \
                    "<b>Admin:</b> {}\n" \
                    "Has enabled strong warns. Users will be banned.".format(html.escape(chat.title),
@@ -349,10 +349,10 @@ def set_warn_strength(bot: Bot, update: Update, args: List[str]):
 
         elif args[0].lower() in ("off", "no"):
             sql.set_warn_strength(chat.id, True)
-            msg.reply_text("Too many warns will now result in a kick! Users will be able to join again after.")
+            msg.reply_text("Too many warns will now result in a kick! Users will be able to join again after😇.")
             return "<b>{}:</b>\n" \
                    "<b>Admin:</b> {}\n" \
-                   "Has disabled strong warns. Users will only be kicked.".format(html.escape(chat.title),
+                   "Has disabled strong warns. Users will only be kicked.😇".format(html.escape(chat.title),
                                                                                   mention_html(user.id,
                                                                                                user.first_name))
 
