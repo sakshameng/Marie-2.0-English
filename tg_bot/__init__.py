@@ -2,7 +2,6 @@ import logging
 import os
 import sys
 
-
 # enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
